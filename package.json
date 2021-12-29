@@ -1,0 +1,48 @@
+{
+  "name": "movie-finder",
+  "version": "1.0.0",
+  "description": "A bare-bones clone of The Movie Database (TMDb) using React/Redux and Node",
+  "engines": {
+    "node": "10.x"
+  },
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "start:local": "cross-env NODE_ENV=production node -r dotenv/config server/index.js",
+    "dev": "concurrently --names \"server,client\" --prefix \"[{name}]\" --prefix-colors \"bgCyan.reset.bold,bgGreen.reset.bold\" \"npm run dev:server --silent\" \"npm run dev:client --silent\"",
+    "dev:server": "nodemon --watch server -r dotenv/config server/index.js ",
+    "dev:client": "cd client && npm start",
+    "build": "cd client && npm install && npm run build",
+    "test:server": "echo \"Error: no test specified\" && exit 1",
+    "test:client": "cd client && npm test",
+    "test:e2e": "start-server-and-test dev http://localhost:3000 cy:open",
+    "test:e2e:run": "cross-env CYPRESS_baseUrl=http://localhost:8080 start-server-and-test start:local http://localhost:8080 cy:run",
+    "cy:open": "cd client && npx cypress open",
+    "cy:run": "cd client && npx cypress run",
+    "clean": "npx rimraf node_modules ./client/node_modules ./client/build",
+    "clean:build": "npx rimraf ./client/build",
+    "setup": "npm install && cd client && npm install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AntoniosProvidakis/movie-finder"
+  },
+  "keywords": [],
+  "author": "Ivan Ivanchenko",
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
+  "dependencies": {
+    "axios": "^0.18.1",
+    "express": "^4.17.1",
+    "limits.js": "^0.1.4"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.1",
+    "cross-env": "^5.2.0",
+    "dotenv": "^8.0.0",
+    "nodemon": "^1.19.1",
+    "start-server-and-test": "^1.9.1"
+  }
+}
